@@ -1,9 +1,3 @@
-/*
-	멤고리즘 
-	우표 N개중 최대 K개를 선택할 수 있으며 우표의 데이터를 조합해
-	1,2,3,4...의 수를 만듦
-	만들수 있는 수중 가장 큰 수 출력
-*/
 #include <stdio.h>
 #include <memory.h>
 #pragma warning(disable:4996)
