@@ -19,38 +19,22 @@ int main() {
 	}
 	printf("%d\n", solve(0, k));
 
+	for(int i=0; i<n+1; i++)
+	{
+		for(int j=0; j<k+1; j++)
+		{
+			printf("%d ", cache[i][j]);
+		}
+		printf("\n");
+	}
+
 	return 0;
 }
 
-// //남은 가치가 leftValue일때 가능한 방법의 수를 반환
-// int solve(int leftValue) {
-// 	printf("%d\n", leftValue);
-
-// 	if(leftValue == 0) {
-// 		//성공시 한가지 방법 추가
-// 		return 1;  
-// 	}
-
-// 	if(leftValue < 0) {
-// 		return 0;
-// 	}
-
-// 	int& ret = cache[leftValue];
-// 	if(ret != -1) {
-// 		return ret;
-// 	}
-// 	ret = 0;
-
-// 	for(int i=0; i<n; i++) {
-// 		printf("-------------%d\n", i);
-// 		ret += solve(leftValue - coin[i]);
-// 	}
-
-// 	return ret;
-// }
-
+//현재 i번째 동전을 사용할 차례일때 
+//leftValue만큼 남을 수 있는 경우의 수 리턴
 int solve(int i, int leftValue) {
-	// printf("%d %d\n", i, leftValue);
+	// printf("%d %d\n", i, leftValue);ㅌ
 
 	if(leftValue == 0) {
 		//성공시 한가지 방법 추가
