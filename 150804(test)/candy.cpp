@@ -9,7 +9,6 @@ VC, GCC에서 사용
 #define NUM 1000000007
 
 int N, K;
-int cache[111][111][111];
 
 int solve(int idx, int leftCandy, int xcnt);
 
@@ -23,16 +22,6 @@ int main()
 
 	for(itr=0; itr<nCount; itr++)
 	{
-		for(int i=0; i<111; i++)
-		{
-			for(int j=0; j<111; j++)
-			{
-				for(int k=0; k<111; k++)
-				{
-					cache[i][j][k] = -1;
-				}
-			}
-		}
 
 		printf("#testcase%d\n",itr+1);
 
@@ -44,7 +33,7 @@ int main()
 	return 0;	/* 반드시 return 0으로 해주셔야합니다. */ 
 }
 
-//idx번째에 줄 사탕 개수를 선택할 차례이고 현재 남은 사탕이 leftCandy개이고ㅜ
+//idx번째에 줄 사탕 개수를 선택할 차례이고 현재 남은 사탕이 leftCandy개이고
 //직전 아이에게 준 사탕의 개수가 xcnt일 때
 //가능한 경우의 수 반환
 int solve(int idx, int leftCandy, int xcnt)
@@ -60,14 +49,6 @@ int solve(int idx, int leftCandy, int xcnt)
 		else 
 			return 0;
 	}
-
-	int& ret = cache[idx][leftCandy][xcnt];
-	if(ret != -1)
-	{
-		// printf("-----caching\n");
-		return ret;
-	}
-	ret = 0;
 
 	for(int cnt=xcnt; cnt<=leftCandy; cnt++)
 	{
