@@ -15,15 +15,15 @@
 #include <stdio.h>
 
 #define SIZE 111
-#define QSIZE 11111
+#define QSIZE 111111
 
 int N;  //땅 전체 크기
 int ground[SIZE][SIZE];
 int queue[QSIZE][2];
 int front, rear;
 bool visited[SIZE][SIZE];
-int psize[SIZE][2];  //땅의 넓이 -> 정렬 해야함
-int plant[SIZE * 2][2];  //식물이 심어져있는 땅의 좌표
+int psize[SIZE][2];  //[0]땅의 넓이 [1]땅의 위치 plant 배열에서의 인덱스
+int plant[SIZE * 2][2];  //행 2개씩 식물이 심어져있는 땅의 좌표
 int pcnt;  //식물 심어진 땅의 갯수
 
 int dirR[4] = {0, 0, 1, -1};
@@ -31,6 +31,9 @@ int dirC[4] = {1, -1, 0, 0};
 
 void bfs(int row, int col);
 void mysort(int (*psize)[2]);
+void swap(int (*arr)[2], int idx1, int idx2);
+int partition(int (*arr)[2], int left, int right);
+void quickSort(int (*arr)[2], int left, int right);
 
 int main()
 {
@@ -97,7 +100,8 @@ int main()
 		}
 
 		//넓이 순으로 정렬
-		mysort(psize);
+		// mysort(psize);
+		quickSort(psize, 0, pcnt - 1);
 
 		printf("%d ", pcnt);
 		for(int i=0; i<pcnt; i++)
@@ -164,7 +168,7 @@ void mysort(int (*psize)[2])
 					//넓이가 같을 경우 행이 작은것 부터
 					int row = plant[psize[j][1] + 1][0] - plant[psize[j][1]][0] + 1;
 					int nrow = plant[psize[j + 1][1] + 1][0] - plant[psize[j + 1][1]][0] + 1;
-					if(row > nrow)
+					if(row < nrow)
 					{
 						//swap
 						int tsize = psize[j][0];
@@ -184,5 +188,72 @@ void mysort(int (*psize)[2])
 				psize[j+1][1] = tpoint;
 			}
 		}
+	}
+}
+
+void swap(int (*arr)[2], int idx1, int idx2)
+{
+	int t1 = arr[idx1][0];
+	int t2 = arr[idx1][1];
+	arr[idx1][0] = arr[idx2][0];
+	arr[idx1][1] = arr[idx2][1];
+	arr[idx2][0] = t1;
+	arr[idx2][1] = t2;
+}
+
+int partition(int (*arr)[2], int left, int right)
+{
+	int pivot = arr[left][0];  //땅의 넓이
+	int low = left + 1;
+	int high = right;
+
+	while(low <= high)
+	{
+		//pivot 보다 커지면 멈춤
+		while(pivot > arr[low][0])
+		{
+			low++;
+			if(low > high)
+				break;
+			if(pivot == arr[low][0])
+			{
+				int prow = plant[arr[left][1] + 1] - plant[arr[left][1]] + 1;
+				int lrow = plant[arr[low][1] + 1] - plant[arr[low][1]] + 1;
+
+				if(prow < lrow)
+					break;
+			}
+		}
+
+		{
+		while(pivot < arr[high][0])
+			high--;
+			if(low > high)
+				break;
+			if(pivot == arr[high][0])
+			{
+				//pivot == arr[high][0]일 때
+				//pivot이 더 작으면 피봇과 스위치
+				int prow = plant[arr[left][1] + 1] - plant[arr[left][1]] + 1;
+				int hrow = plant[arr[high][1] + 1] - plant[arr[high][1]] + 1;
+				if(prow < hrow)
+					break;
+			}
+		}
+
+		if(low <= high)
+			swap(arr, low, high);
+	}
+	swap(arr, left, high);
+	return high;
+}
+
+void quickSort(int (*arr)[2], int left, int right)
+{
+	if(left <= right)
+	{
+		int pivot = partition(arr, left, right);
+		quickSort(arr, left, pivot - 1);
+		quickSort(arr, pivot + 1, right);
 	}
 }
