@@ -34,7 +34,7 @@ int main() {
 //현재 i번째 동전을 사용할 차례일때 
 //leftValue만큼 남을 수 있는 경우의 수 리턴
 int solve(int i, int leftValue) {
-	// printf("%d %d\n", i, leftValue);ㅌ
+	// printf("%d %d\n", i, leftValue);
 
 	if(leftValue == 0) {
 		//성공시 한가지 방법 추가
