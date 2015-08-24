@@ -4,9 +4,9 @@
 
 int compare (const void *a, const void *b)
 {
-    const int *ia = (const int *)a; // casting pointer types 
-    const int *ib = (const int *)b;
-    return *ia  - *ib; 
+    // const int *ia = (const int *)a; // casting pointer types 
+    // const int *ib = (const int *)b;
+    return *(int*)a  - *(int*)b; 
 }
 
 int num1;
@@ -17,7 +17,7 @@ int arr2[1111111];
 bool search(int num);
 
 int main() {
-	int nCount;
+	int nCount;	
 	int itr;
 	scanf("%d", &nCount);
 
@@ -30,6 +30,11 @@ int main() {
 		} 
 
 		qsort(arr1, num1, sizeof(int), compare);
+		for(int i=0; i<num1; i++)
+		{
+			printf("%d ", arr1[i]);
+		}
+		printf("\n");
 
 		scanf("%d", &num2);
 		for(int i=0; i<num2; i++) {
