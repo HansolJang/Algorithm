@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <memory.h>
 
 #define SIZE 111
 #define QSIZE 11111
@@ -69,15 +68,6 @@ int main()
 			}
 		}
 
-		for(int i=0; i<=M; i++)
-		{
-			for(int j=0; j<=N; j++)
-			{
-				printf("[%d][%d] up:%d right:%d\n", i, j, map[i][j].right, map[i][j].down);
-			}
-			printf("---------------------\n");
-		}
-
 		solve();
 
 		if(ans == INF)
@@ -126,6 +116,7 @@ void solve()
 			pnext.row = pfront.row;
 			pnext.col = pfront.col + 1;
 			pnext.fuel = pfront.fuel + map[pfront.row][pfront.col].right;
+			pnext.was_right = true;
 			if(!pfront.was_right)
 				pnext.turn_cnt = pfront.turn_cnt + 1;
 			else
@@ -138,7 +129,6 @@ void solve()
 				if(pnext.row == M && pnext.col == N)
 				{
 					c_time = pnext.step * L + pnext.turn_cnt;
-					printf("step :%d turn_cnt:%d time:%d\n", pnext.step, pnext.turn_cnt, c_time);
 					if(ans > c_time)
 						ans = c_time;
 				}
@@ -160,6 +150,7 @@ void solve()
 			pnext.row = pfront.row + 1;
 			pnext.col = pfront.col;
 			pnext.fuel = pfront.fuel + map[pfront.row][pfront.col].down;
+			pnext.was_right = false;
 			if(pfront.was_right)
 				pnext.turn_cnt = pfront.turn_cnt + 1;
 			else
@@ -172,7 +163,6 @@ void solve()
 				if(pnext.row == M && pnext.col == N)
 				{
 					c_time = pnext.step * L + pnext.turn_cnt;
-					printf("step :%d turn_cnt:%d time:%d\n", pnext.step, pnext.turn_cnt, c_time);
 					if(ans > c_time)
 						ans = c_time;
 				}
