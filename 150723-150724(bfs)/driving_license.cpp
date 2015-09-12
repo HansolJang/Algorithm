@@ -149,13 +149,10 @@ void solve()
 					}
 					else
 					{
-						if(fuel_map[pnext.row][pnext.col] != pnext.fuel)
+						if(fuel_map[pnext.row][pnext.col] > pnext.fuel)
 						{
 							queue[rear++] = pnext;
 							rear %= QSIZE;
-
-							if(fuel_map[pnext.row][pnext.col] > pnext.step)
-								fuel_map[pnext.row][pnext.col] = pnext.step;
 						}
 					}
 				}
@@ -197,13 +194,10 @@ void solve()
 					}
 					else
 					{
-						if(fuel_map[pnext.row][pnext.col] != pnext.fuel)
+						if(fuel_map[pnext.row][pnext.col] > pnext.fuel)
 						{
 							queue[rear++] = pnext;
 							rear %= QSIZE;
-							
-							if(fuel_map[pnext.row][pnext.col] > pnext.step)
-								fuel_map[pnext.row][pnext.col] = pnext.step;
 						}
 					}
 				}
