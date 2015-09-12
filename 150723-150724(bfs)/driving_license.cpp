@@ -154,8 +154,8 @@ void solve()
 							queue[rear++] = pnext;
 							rear %= QSIZE;
 
-							// if(fuel_map[pnext.row][pnext.col] > pnext.step)
-							// 	fuel_map[pnext.row][pnext.col] = pnext.step;
+							if(fuel_map[pnext.row][pnext.col] > pnext.step)
+								fuel_map[pnext.row][pnext.col] = pnext.step;
 						}
 					}
 				}
@@ -201,6 +201,9 @@ void solve()
 						{
 							queue[rear++] = pnext;
 							rear %= QSIZE;
+							
+							if(fuel_map[pnext.row][pnext.col] > pnext.step)
+								fuel_map[pnext.row][pnext.col] = pnext.step;
 						}
 					}
 				}
