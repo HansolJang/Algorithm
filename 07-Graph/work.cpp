@@ -7,9 +7,10 @@ int N;
 vector<int> todo[10001];
 int work[10001];
 int prework[10001];
+int stwork[10001] = {0, };
 queue<pair<int, int> > q;
 int main() {
-	int t, fwork, ftime, ans;
+	int t, fwork, ftime, ans = 0;
 	scanf("%d", &N);
 	for(int i=1; i<=N; i++) {
 		scanf("%d %d", &work[i], &prework[i]);
@@ -29,8 +30,9 @@ int main() {
 		q.pop();
 		t = todo[fwork].size();
 		for(int i=0; i<t; i++) {
+			stwork[todo[fwork][i]] = max(stwork[todo[fwork][i]], ftime);
 			if(--prework[todo[fwork][i]] == 0)
-				q.push(make_pair(todo[fwork][i], ftime + work[todo[fwork][i]]));
+				q.push(make_pair(todo[fwork][i], stwork[todo[fwork][i]] + work[todo[fwork][i]]));
 		}
 	}
 	printf("%d\n", ans);
