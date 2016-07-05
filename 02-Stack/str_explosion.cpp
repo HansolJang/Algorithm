@@ -3,7 +3,7 @@
 #include <string>
 #include <stack>
 using namespace std;
-
+bool unused[1000000] = {0, };
 int main() {
 	ios_base::sync_with_stdio(false);
 	int i, j, alen, blen, idx = 0;
@@ -12,7 +12,6 @@ int main() {
 	cin >> a >> b;
 	alen = a.length();
 	blen = b.length();
-	bool unused[alen];
 	if(blen == 1) {
 		for(int i=0; i<alen; i++) {
 			if(a[i] == b[0])
