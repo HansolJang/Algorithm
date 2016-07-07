@@ -6,54 +6,53 @@
 using namespace std;
 #define SIZE 1001
 int inf = 1000000000;
-int town[SIZE][SIZE];
+int gox[SIZE][SIZE];
+int comex[SIZE][SIZE];
 int total_time[SIZE];
 bool check[SIZE];
 int dist[SIZE];
-int n, m, x, s, e, c, start, front, next, ans;
+int n, m, x, s, e, c, ans;
+void dijkstra(int (*g)[SIZE]) {
+	for(int i=0; i<SIZE; i++) {
+		check[i] = false;
+		dist[i] = inf;
+	}
+	int start = x;
+	priority_queue<pair<int, int> > q;
+	dist[start] = 0;
+	q.push(make_pair(dist[start], start));
+	while(!q.empty()) {
+		int front = q.top().second;
+		q.pop();
+		check[front] = true;
+		for(int i=1; i<=n; i++) {
+			if(g[front][i] > 0) {
+				if(check[i] == false && dist[i] > dist[front] + g[front][i]) {
+					dist[i] = dist[front] + g[front][i];
+					q.push(make_pair(-dist[i], i));
+				}
+			}
+		}
+	}
+}
 int main() {
-	memset(town, 0, sizeof(town));
+	memset(gox, 0, sizeof(gox));
+	memset(comex, 0, sizeof(comex));
 	memset(total_time, 0, sizeof(total_time));
 	scanf("%d %d %d", &n, &m, &x);
 	for(int i=0; i<m; i++) {
 		scanf("%d %d %d", &s, &e, &c);
-		town[s][e] = c;
+		gox[e][s] = c;
+		comex[s][e] = c;
 	}
 	ans = 0;
-	//가는 비용: 1~n 정점까지 모두 다익스트라 진행
-	//돌아오는 비용: n + 1번째에 x를 시작으로 다시 다익스트라 진행
-	for(int i=1; i<=n + 1; i++) {
-		for(int j=0; j<SIZE; j++) {
-			check[j] = false;
-			dist[j] = inf;
-		}
-		start = (i == n + 1 ? x : i);
-		priority_queue<pair<int, int> > q;
-		dist[start] = 0;
-		q.push(make_pair(dist[start], start));
-		while(!q.empty()) {
-			front = q.top().second;
-			q.pop();
-			check[front] = true;
-			for(next=1; next<=n; next++) {
-				if(town[front][next] > 0) {
-					if(check[next] == false && dist[next] > dist[front] + town[front][next]) {
-						dist[next] = dist[front] + town[front][next];
-						q.push(make_pair(-dist[next], next));
-					}
-				}
-			}
-		}
-		//가는 비용
-		if(i < n + 1)
-			total_time[start] += dist[x];
-		//돌아오는 비용
-		else {
-			for(int j=1; j<=n; j++) {
-				total_time[j] += dist[j];
-				ans = max(ans, total_time[j]);
-			}
-		}
+	dijkstra(gox);
+	for(int i=1; i<=n; i++)
+		total_time[i] += dist[i];
+	dijkstra(comex);
+	for(int i=1; i<=n; i++) {
+		total_time[i] += dist[i];
+		ans = max(ans, total_time[i]);
 	}
 	printf("%d\n", ans);
 }
