@@ -1,12 +1,12 @@
 //https://www.acmicpc.net/problem/1162
 #include <cstdio>
+#include <cstring>
 #include <vector>
 #include <queue>
 #include <algorithm>
 using namespace std;
 #define SIZE 10001
 int inf = 1000000000;
-//SIZE * SIZE 배열을 만들면 메모리 초과이기 때문에 SIZE 배열의 동적배열에 간선개수 만큼만 2차원으로
 struct Edge {
 	int to;
 	int cost;
@@ -23,10 +23,11 @@ struct Cur {
 	}
 };
 vector<Edge> city[SIZE];
-bool check[SIZE];
+bool check[SIZE][21];
 int dist[SIZE];
-int n, m, k, s, e, w, fv, flen, nv, t;
+int n, m, k, s, e, w, flen, nv, t;
 int main() {
+	memset(check, 0, sizeof(check));
 	for(int i=0; i<SIZE; i++)
 		dist[i] = inf;
 	scanf("%d %d %d", &n, &m, &k);
@@ -42,21 +43,19 @@ int main() {
 	while(!q.empty()) {
 		Cur f = q.top();
 		q.pop();
-		fv = f.vertex;
-		check[fv] = true;
-		flen = city[fv].size();
+		if(check[f.vertex][f.wrap_cnt]) continue;
+		else check[f.vertex][f.wrap_cnt] = true;
+		flen = city[f.vertex].size();
 		for(int i=0; i<flen; i++) {
-			nv = city[fv][i].to;
+			nv = city[f.vertex][i].to;
 			//t = 그대로 지나가는 비용
-			t = f.d + city[fv][i].cost;
-			if(!check[nv])
+			t = f.d + city[f.vertex][i].cost;
+			if(!check[nv][f.wrap_cnt])
 				q.push(Cur(t, nv, f.wrap_cnt));
 			//포장이 가능할 경우 포장
-			if(f.wrap_cnt < k) {
-				if(!check[nv]) {
-					q.push(Cur(f.d, nv, f.wrap_cnt + 1));
-					t = min(t, f.d);
-				}
+			if(f.wrap_cnt < k && !check[nv][f.wrap_cnt + 1]) {
+				q.push(Cur(f.d, nv, f.wrap_cnt + 1));
+				t = min(t, f.d);
 			}
 			//모든 경우 중 최소값을 dist 배열에 저장
 			dist[nv] = min(dist[nv], t);
