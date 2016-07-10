@@ -3,7 +3,6 @@
 #include <algorithm>
 using namespace std;
 int input[10001];
-int inf = 1000000000;
 int tmp, maxcnt, idx;
 int main() {
 	int n;
