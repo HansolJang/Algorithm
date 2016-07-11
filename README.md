@@ -16,9 +16,6 @@ Data Structure & Algorithm
 |  04  | Recursive and Back Tracking |  재귀를 이용한 완전 탐색과 백트랙킹  |
 |  05  | Binary Search               |  이진 탐색 구현                   |
 |  06  | Quick Sort                  |  퀵 정렬 기법 구현                 |
-|  07  | DFS                         |  그래프의 탐색기법                 |
-|  08  | BFS                         |  그래프의 탐색기법                 |
-|  09  | Dynamic Programming         |  메모이제이션을 활용한 재귀          |
-|  10  | Dijkstra Algorithm          |  최단경로 관련 알고리즘             |
-|  11  | Kruscal Algorithm           |  최소비용트리 관련 알고리즘(미완성)   |
-|  12  | Tree                        |  트리 자료 구조                    |
+|  07  | Graph                       |  dfs, bfs, dijkstra, kruscal 등 |
+|  08  | Dynamic Programming         |  메모이제이션을 활용한 재귀          |
+|  09  | KMP				         |  문자열 검색 알고리즘 	            |
