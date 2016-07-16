@@ -7,8 +7,6 @@ lis[length]로 변경
 
 마지막 항이 작으면 작을수록 이후에 부분 증가수열이 길어질 가능성이 높아진다
 
-
-
 */
 #include <stdio.h>
 #include <memory.h>
@@ -22,42 +20,32 @@ int num, idx;
 int bsearch(int key, int len);  //lis배열에 들어갈 위치를 찾을 이진검색 함수
 void solve();
 
-int main()
-{
+int main() {
 	int itr;
 	int nCount;
-
 	scanf("%d", &nCount);
-	for(itr=0; itr<nCount; itr++)
-	{
+	for(itr=0; itr<nCount; itr++) {
 		memset(lis, 0, sizeof(lis));
 		scanf("%d %d", &num, &idx);
-		for(int i=0; i<num; i++)
-		{
+		for(int i=0; i<num; i++) {
 			scanf("%d", &input[i]);
 		}
-
 		solve();
-
 		printf("Case #%d\n", itr +1);
 		if(lis[idx] != 0)
 			printf("1\n");
 		else
 			printf("0\n");
-
 	}
-
 	return 0;
 }
 
-int bsearch(int key, int len)
-{
+int bsearch(int key, int len) {
 	int low = 0;
 	int high = len;
 	int mid;
 
-	while(low <= high)
-	{
+	while(low <= high) {
 		mid = (low + high) / 2;
 		if(key > lis[mid])
 			low = mid + 1;
@@ -66,29 +54,21 @@ int bsearch(int key, int len)
 		else
 			return mid;
 	}
-
 	return low;
 }
 
-void solve()
-{
+void solve() {
 	//첫번째 원소 넣기
 	int pos;
 	int len = 0;
 	lis[++len] = input[0];  //len = 1
-
-	for(int i=1; i<num; i++)
-	{
+	for(int i=1; i<num; i++) {
 		// printf("%d : ", i);
 		//마지막 원소보다 크면 뒤에 추가
 		if(lis[len] < input[i])
-		{
 			lis[++len] = input[i];
-			// printf("new insert lis[%d] : %d\n", len, input[i]);
-		}
 		//작을 경우 들어갈 위치 찾아 갱신
-		else if(lis[len] > input[i])
-		{
+		else if(lis[len] > input[i]) {
 			pos = bsearch(input[i], len);
 			lis[pos] = input[i];
 			// printf("bsearch lis[%d] : %d\n", pos, input[i]);
