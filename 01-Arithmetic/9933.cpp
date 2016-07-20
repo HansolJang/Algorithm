@@ -23,7 +23,7 @@ int main() {
 			}
 			if(is_same) break;
 		}
-		if(is_same || n == 1) {
+		if(is_same) {
 			cout << len1 << ' ' << (char)s[i][len1 / 2] << '\n';
 			break;
 		}
