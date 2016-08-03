@@ -5,10 +5,10 @@
 #include <string>
 using namespace std;
 string input;
-long long d[5001];
+int d[5001];
 int len;
 //문자열의 idx번째에서의 가능한 경우의 수 리턴
-long long solve(int idx) {
+int solve(int idx) {
 	if(idx == len)
 		return 1;
 	if(idx > len)
@@ -27,6 +27,6 @@ int main() {
 	memset(d, -1, sizeof(d));
 	cin >> input;
 	len = input.length();
-	printf("%lld\n", solve(0));
+	printf("%d\n", solve(0));
 	return 0;
 }
