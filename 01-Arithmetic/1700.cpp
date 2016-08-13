@@ -10,8 +10,13 @@ int main() {
 	scanf("%d %d", &n, &k);
 	for(int i=0; i<k; i++)
 		scanf("%d", &ename[i]);
-	for(int i=0; i<n; i++)
+	int cnt = 0;
+	for(int i=0; i<k; i++) { //처음에 n개 꽂기
+		if(plugged[ename[i]]) continue;
 		plugged[ename[i]] = true;
+		cnt += 1;
+		if(cnt == n) break;
+	}
 	for(int i=n; i<k; i++) {
 		if(plugged[ename[i]]) continue; //원래 꼽힌거면 건너뛰기
 		memset(check, 0, sizeof(check));
