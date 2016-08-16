@@ -5,10 +5,10 @@
 using namespace std;
 #define X 0
 #define Y 1
-int car[1001] = {0, };
-int event[1001][2] = {0, };
+int path[1001][1001];
+int event[1001][2];
 int dp[1001][1001];
-int dist[1001][1001] = {0, };
+int dist[1001][1001];
 int n, w, x, y, inf = 1000000000;
 int get_dist(int x1, int y1, int x2, int y2) {
 	return abs(x1 - x2) + abs(y1 - y2);
@@ -25,7 +25,7 @@ int solve(int car1, int car2) {
 	//2번차 선택
 	int temp2 = dist[next_event][car2] + solve(car1, next_event);
 	//차번호 저장
-	car[next_event] = (temp1 > temp2 ? 2 : 1);
+	path[car1][car2] = (temp1 > temp2 ? 2 : 1);
 	return dp[car1][car2] = min(temp1, temp2);
 }
 int main() {
@@ -44,7 +44,11 @@ int main() {
 			dist[i][j] = get_dist(event[i][X], event[i][Y], event[j][X], event[j][Y]);
 	}
 	printf("%d\n", solve(0, 0));
-	for(int i=1; i<=w; i++)
-		printf("%d\n", car[i]);
+	int car1 = 0, car2 = 0;
+	for(int i=1; i<=w; i++){
+		printf("%d\n", path[car1][car2]);
+		if(path[car1][car2] == 1) car1++;
+		else car2++;
+	}
 	return 0;
 }
