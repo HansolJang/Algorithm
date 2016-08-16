@@ -47,8 +47,8 @@ int main() {
 	int car1 = 0, car2 = 0;
 	for(int i=1; i<=w; i++){
 		printf("%d\n", path[car1][car2]);
-		if(path[car1][car2] == 1) car1++;
-		else car2++;
+		if(path[car1][car2] == 1) car1 = i;
+		else car2 = i;
 	}
 	return 0;
 }
