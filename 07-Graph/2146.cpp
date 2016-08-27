@@ -4,7 +4,7 @@
 #include <algorithm>
 using namespace std;
 #define SIZE 105
-#define QSIZE 1000000
+#define QSIZE 10000
 int n, front, rear, num = 1;
 int map[SIZE][SIZE];
 int visited[SIZE][SIZE];
