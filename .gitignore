@@ -1,31 +1,4 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+*
+!*.c
+!*.cpp
 
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.exec
-*.out
-*.app
-150907/guitar.c
-151114/mt_game.c
