@@ -19,3 +19,4 @@ Data Structure & Algorithm
 |  07  | Graph                       |  dfs, bfs, dijkstra, kruscal 등 |
 |  08  | Dynamic Programming         |  메모이제이션을 활용한 재귀          |
 |  09  | KMP				         |  문자열 검색 알고리즘 	            |
+|  10  | Hackerrank 30days	         |  Hackerrank 튜토리얼 문제 풀이   |
