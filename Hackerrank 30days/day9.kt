@@ -16,12 +16,14 @@ import kotlin.jvm.internal.*
 import kotlin.ranges.*
 import kotlin.sequences.*
 import kotlin.text.*
-
-fun main(args: Array<String>) {
+ // Complete the factorial function below.
+fun factorial(n: Int): Int {
+    if(n == 1) return 1
+    else return n * factorial(n-1)
+}
+ fun main(args: Array<String>) {
     val scan = Scanner(System.`in`)
      val n = scan.nextLine().trim().toInt()
-     val arr = scan.nextLine().split(" ").map{ it.trim().toInt() }.toTypedArray()
-    for(i in arr.size-1 downTo 0) {
-        print("${arr[i]} ")
-    }
+     val result = factorial(n)
+     println(result)
 }

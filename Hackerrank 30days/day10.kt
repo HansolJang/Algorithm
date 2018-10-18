@@ -17,11 +17,18 @@ import kotlin.ranges.*
 import kotlin.sequences.*
 import kotlin.text.*
 
+
+
 fun main(args: Array<String>) {
     val scan = Scanner(System.`in`)
-     val n = scan.nextLine().trim().toInt()
-     val arr = scan.nextLine().split(" ").map{ it.trim().toInt() }.toTypedArray()
-    for(i in arr.size-1 downTo 0) {
-        print("${arr[i]} ")
+    var n: Int = scan.nextLine().trim().toInt()
+    var answer = 0
+    var temp = 0
+    while(n > 0) {
+        if(n % 2 == 1) temp++ 
+        else temp = 0
+        answer = if(temp > answer) temp else answer
+        n = n / 2
     }
+    println("$answer")
 }

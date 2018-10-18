@@ -24,11 +24,21 @@ fun factorial(n: Int): Int {
 }
 
 fun main(args: Array<String>) {
-    val scan = Scanner(System.`in`)
 
+	val scan = Scanner(System.`in`)
     val n = scan.nextLine().trim().toInt()
+    val map = HashMap<String, String>()
 
-    val result = factorial(n)
-
-    println(result)
+    for(i in 0..n-1) {
+        val splitarr = scan.nextLine().split(" ")
+        map.set(splitarr.get(0), splitarr.get(1))
+    }
+     for(i in 0..n-1) {
+        val input = scan.nextLine()
+        if(map.get(input) != null) {
+            println("${input}=${map.get(input)}")
+        } else {
+            println("Not found")
+        }      
+    }
 }
