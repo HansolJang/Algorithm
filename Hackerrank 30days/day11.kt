@@ -26,7 +26,7 @@ fun main(args: Array<String>) {
         arr[i] = scan.nextLine().split(" ").map{ it.trim().toInt() }.toTypedArray()
     }
 
-    var answer = 0
+    var answer = -100
     var temp = 0
     for(i in 0..3) {
         for(j in 0..3) {
