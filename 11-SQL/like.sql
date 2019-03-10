@@ -1,0 +1,2 @@
+# https://www.hackerrank.com/challenges/weather-observation-station-8/problem
+select city from station where (city like 'A%' || city like 'E%' || city like 'U%' || city like 'I%' || city like 'O%') and (city like '%a' || city like '%e' || city like '%u' || city like '%i' || city like '%o');
