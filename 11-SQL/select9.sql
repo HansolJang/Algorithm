@@ -1,0 +1,1 @@
+select CITY from STATION where CITY not regexp '^[auoie].*[aouie]$' order by CITY;
